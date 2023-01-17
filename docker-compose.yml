@@ -5,12 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 5432:5432
     depends_on:
       - MySql
   MySql:
-    container_name: 
-    image: MySql
+    container_name: Greenvault
+    image: mysql
     environment:
       MYSQL_DATABASE: 'db'
       MYSQL_USER: 'user'
