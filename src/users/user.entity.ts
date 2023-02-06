@@ -1,8 +1,8 @@
-import { BeforeInsert, Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
-import { CommentEntity } from "src/comments.entity";
-import { WishlistEntity } from "src/wishlist.entity";
-import { UserStatsEntity } from "src/user_stats.entity";
+import { CommentEntity } from "src/comments/comments.entity";
+import { WishlistEntity } from "src/wishlist/wishlist.entity";
+import { CategroriesEntity } from "src/categories/categories.entity";
 
 @Entity('user')
 export class UserEntity {  
@@ -18,24 +18,17 @@ export class UserEntity {
     @Column({ type: "varchar", nullable: false})
     password: string;
 
-    @Column({ type: "varchar", nullable: false})
-    role: string;
+    @Column({ type: "boolean", nullable: false})
+    Admin: boolean;
 
     @Column({ type: "float", nullable: false})
     wallet: number;
 
     @Column({ 
-        type: Date, 
+        type: "datetime", 
         nullable: false 
     }) 
     creation_date: string;
-
-    @Column({ 
-        type: "text", 
-        array: true, 
-        nullable: false 
-    })
-    followed_categories: string[];
 
     @BeforeInsert()  
     async hashPassword() {
@@ -48,7 +41,7 @@ export class UserEntity {
     @OneToMany(type => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity[];
 
-    @OneToOne(type => UserStatsEntity, stats => stats.user)
-    stats: UserStatsEntity;
+    @ManyToMany(() => CategroriesEntity, categories => categories.user)
+    categories: CategroriesEntity[]
 }
 

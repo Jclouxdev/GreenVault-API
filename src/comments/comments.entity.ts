@@ -1,5 +1,5 @@
 import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { UserEntity } from "./users/user.entity";
+import { UserEntity } from "../users/user.entity";
 
 @Entity('comment')
 export class CommentEntity {  
@@ -13,7 +13,7 @@ export class CommentEntity {
     announcement_id: string;
 
     @Column({ 
-        type: Date, 
+        type: "datetime", 
         nullable: false 
     }) 
     creation_date: string;

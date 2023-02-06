@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from "typeorm";
-import { WishlistEntity } from "./wishlist.entity";
+import { WishlistEntity } from "../wishlist/wishlist.entity";
 
 @Entity('announcement')
 export class announcementEntity {
@@ -26,15 +26,36 @@ export class announcementEntity {
     description: string;
 
     @Column({ 
-        type: "varchar",  
+        type: "integer",  
     })
-    categories: string;
+    categories_id: number;
 
     @Column({
-        type: Date,
+        type: "datetime",
         nullable: false
     })
     creation_date: string;
+
+    @Column({
+        type: "boolean",
+    })
+    status: boolean;
+
+    @Column({
+        type: "datetime",
+        nullable: false
+    })
+    paiement_date: string;
+
+    @Column({
+        type: "boolean",
+    })
+    reported: boolean;
+
+    @Column({
+        type: "boolean",
+    })
+    hidden: boolean;
 
     @OneToOne(type => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity;

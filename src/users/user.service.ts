@@ -4,8 +4,6 @@ import { isUUID } from 'class-validator';
 import { query } from 'express';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';
-import { toUserDto } from './dto/toUser.dto';
 import { UserDto } from './dto/user.dto';
 import { UserEntity } from './user.entity';
 
@@ -18,7 +16,7 @@ export class UsersService {
   ) {}
 
 
-      FindOneEmail(email: string): Promise<UserEntity> {
+    FindOneEmail(email: string): Promise<UserEntity> {
         return this.userRepo.findOne({ where: {email: email} });
     }
 

@@ -1,6 +1,6 @@
 import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { UserEntity } from "./users/user.entity";
-import { announcementEntity } from "./announcement.entity";
+import { UserEntity } from "../users/user.entity";
+import { announcementEntity } from "../announcements/announcement.entity";
 
 @Entity('wishlist')
 export class WishlistEntity {  
