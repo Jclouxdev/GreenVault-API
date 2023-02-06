@@ -3,10 +3,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { UsersController } from './users/users.controller';
 import { UserEntity } from './users/user.entity';
-import { UsersService } from './users/user.service';
 import { UsersModule } from './users/users.module';
+import { GroupsEntity } from './groups/groups.entity';
+import { CommentEntity } from './comments/comments.entity';
+import { announcementEntity } from './announcements/announcement.entity';
+import { CategroriesEntity } from './categories/categories.entity';
+import { WishlistEntity } from './wishlist/wishlist.entity';
 
 
 
@@ -17,12 +20,12 @@ import { UsersModule } from './users/users.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
-        host: configService.get('DB_HOST'),
-        port: +configService.get<number>('DB_PORT'),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
-        entities: [UserEntity],
+        host: configService.get('MYSQL_HOST'),
+        port: +configService.get<number>('MYSQL_PORT'),
+        username: configService.get('MYSQL_USER'),
+        password: configService.get('MYSQL_PASSWORD'),
+        database: configService.get('MYSQL_DATABASE'),
+        entities: [UserEntity, GroupsEntity, CommentEntity, announcementEntity, CategroriesEntity, WishlistEntity],
         synchronize: true,
       }),
       inject: [ConfigService],

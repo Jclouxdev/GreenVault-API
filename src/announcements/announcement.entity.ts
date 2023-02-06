@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, CreateDateColumn } from "typeorm";
 import { WishlistEntity } from "../wishlist/wishlist.entity";
 
 @Entity('announcement')
@@ -30,11 +30,11 @@ export class announcementEntity {
     })
     categories_id: number;
 
-    @Column({
-        type: "datetime",
-        nullable: false
-    })
-    creation_date: string;
+    @CreateDateColumn({ 
+        type: "datetime", 
+        nullable: false,
+    }) 
+    creation_date: Date;
 
     @Column({
         type: "boolean",

@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 import { UserEntity } from "../users/user.entity";
 
 @Entity('comment')
@@ -12,11 +12,11 @@ export class CommentEntity {
     @Column({ type:"uuid", nullable: false})
     announcement_id: string;
 
-    @Column({ 
+    @CreateDateColumn({ 
         type: "datetime", 
-        nullable: false 
+        nullable: false,
     }) 
-    creation_date: string;
+    creation_date: Date;
 
     @Column({ 
         type: "varchar",  

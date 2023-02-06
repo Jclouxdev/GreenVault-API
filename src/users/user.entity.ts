@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { CommentEntity } from "src/comments/comments.entity";
 import { WishlistEntity } from "src/wishlist/wishlist.entity";
@@ -18,17 +18,17 @@ export class UserEntity {
     @Column({ type: "varchar", nullable: false})
     password: string;
 
-    @Column({ type: "boolean", nullable: false})
+    @Column({ type: "boolean", nullable: false, default: false})
     Admin: boolean;
 
-    @Column({ type: "float", nullable: false})
+    @Column({ type: "float", nullable: false, default: 100})
     wallet: number;
 
-    @Column({ 
+    @CreateDateColumn({ 
         type: "datetime", 
-        nullable: false 
+        nullable: false,
     }) 
-    creation_date: string;
+    creation_date: Date;
 
     @BeforeInsert()  
     async hashPassword() {
