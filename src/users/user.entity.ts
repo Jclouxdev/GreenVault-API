@@ -1,5 +1,8 @@
-import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { CommentEntity } from "src/comments.entity";
+import { WishlistEntity } from "src/wishlist.entity";
+import { UserStatsEntity } from "src/user_stats.entity";
 
 @Entity('user')
 export class UserEntity {  
@@ -33,6 +36,11 @@ export class UserEntity {
         nullable: false 
     })
     followed_categories: string[];
+
+    @BeforeInsert()  
+    async hashPassword() {
+        this.password = await bcrypt.hash(this.password, 10);  
+    }
 
     @OneToMany(type => CommentEntity, comment => comment.user)
     comments: CommentEntity[];

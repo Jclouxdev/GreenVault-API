@@ -1,7 +1,8 @@
-import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from "typeorm";
+import { WishlistEntity } from "./wishlist.entity";
 
-@Entity('advertisement')
-export class AdvertisementEntity {
+@Entity('announcement')
+export class announcementEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -34,4 +35,7 @@ export class AdvertisementEntity {
         nullable: false
     })
     creation_date: string;
+
+    @OneToOne(type => WishlistEntity, wishlist => wishlist.user)
+    wishlist: WishlistEntity;
 }

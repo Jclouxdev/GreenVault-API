@@ -1,4 +1,5 @@
 import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "./users/user.entity";
 
 @Entity('comment')
 export class CommentEntity {  
@@ -9,7 +10,7 @@ export class CommentEntity {
     user_id: string;
 
     @Column({ type:"uuid", nullable: false})
-    advertisement_id: string;
+    announcement_id: string;
 
     @Column({ 
         type: Date, 
@@ -21,5 +22,8 @@ export class CommentEntity {
         type: "varchar",  
     }) 
     message: string;
+
+    @ManyToOne(type => UserEntity, user => user.comments)
+    user: UserEntity;
 
 }

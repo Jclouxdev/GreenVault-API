@@ -1,4 +1,5 @@
 import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "./users/user.entity";
 
 @Entity('user_stats')
 export class UserStatsEntity {  
@@ -12,10 +13,10 @@ export class UserStatsEntity {
     comments_posted: number;
 
     @Column({ type: "integer", nullable: false})
-    advertisements_posted: number;
+    announcements_posted: number;
 
     @Column({ type: "integer", nullable: false})
-    advertisements_completed: number;
+    announcements_completed: number;
 
     @Column({ type: "float", nullable: false})
     total_earned: number;

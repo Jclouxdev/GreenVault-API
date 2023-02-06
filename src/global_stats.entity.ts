@@ -12,10 +12,10 @@ export class GlobalStatsEntity {
     total_comments_posted: number;
 
     @Column({ type: "integer", nullable: false})
-    total_advertisements_posted: number;
+    total_announcements_posted: number;
 
     @Column({ type: "integer", nullable: false})
-    total_advertisements_completed: number;
+    total_announcements_completed: number;
 
     @Column({ type: "float", nullable: false})
     total_earned: number;
