@@ -1,11 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards, Request, ValidationPipe, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Patch, Delete, UseGuards, Request, ValidationPipe, UsePipes } from '@nestjs/common';
 import { JwtAuthGuard } from './../auth/guards/jwt-auth.guards';
 import { LocalAuthGuard } from './../auth/guards/local-auth.guard';
 import { AuthService } from './../auth/services/auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
-import { UserDto } from './dto/user.dto';
 import { UsersService } from './user.service';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserEntity } from './user.entity';
 
 @Controller('users')
 export class UsersController {
@@ -38,6 +39,17 @@ export class UsersController {
     console.log(req.user)
     return req.user;
   }
+
+  @Patch(':id/update')
+  update(@Param('id') id: string, @Body() updateUser: UserEntity) {
+    updateUser.id = String(id)
+    return this.userService.update(updateUser);
+  }
+
+  @Delete(':id/delete')
+    async delete(@Param('id') id: string){
+      return this.userService.delete(id);
+  } 
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
