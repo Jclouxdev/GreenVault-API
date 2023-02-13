@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards, Request, ValidationPipe, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+  Request,
+  ValidationPipe,
+  UsePipes,
+} from '@nestjs/common';
 import { JwtAuthGuard } from './../auth/guards/jwt-auth.guards';
 import { LocalAuthGuard } from './../auth/guards/local-auth.guard';
 import { AuthService } from './../auth/services/auth.service';
@@ -9,11 +20,11 @@ import { UsersService } from './user.service';
 
 @Controller('users')
 export class UsersController {
-    constructor(
-      private userService: UsersService,
-      private authService: AuthService
-    ) {}
-    
+  constructor(
+    private userService: UsersService,
+    private authService: AuthService,
+  ) {}
+
   @UseGuards(JwtAuthGuard)
   @Get('')
   getAllUser() {
@@ -21,7 +32,10 @@ export class UsersController {
   }
 
   @Post('/auth/sign-up')
-  create(@Body(new ValidationPipe({transform:true, whitelist: true})) user: CreateUserDto){
+  create(
+    @Body(new ValidationPipe({ transform: true, whitelist: true }))
+    user: CreateUserDto,
+  ) {
     return this.userService.create(user);
   }
 
@@ -35,14 +49,13 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('/me')
   getProfile(@Request() req) {
-    console.log(req.user)
+    console.log(req.user);
     return req.user;
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  getUserId(@Param('id')id: string){
+  getUserId(@Param('id') id: string) {
     return this.userService.getUserId(id);
   }
-
 }

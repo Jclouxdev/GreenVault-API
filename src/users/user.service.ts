@@ -1,7 +1,13 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException, Query } from '@nestjs/common';
+import { faker } from '@faker-js/faker';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+  Query,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isUUID } from 'class-validator';
-import { query } from 'express';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
@@ -11,53 +17,69 @@ import { UserEntity } from './user.entity';
 export class UsersService {
   private readonly users: CreateUserDto[] = [];
   constructor(
-    @InjectRepository(UserEntity)    
+    @InjectRepository(UserEntity)
     private readonly userRepo: Repository<UserEntity>,
   ) {}
 
+  FindOneEmail(email: string): Promise<UserEntity> {
+    return this.userRepo.findOne({ where: { email: email } });
+  }
 
-    FindOneEmail(email: string): Promise<UserEntity> {
-        return this.userRepo.findOne({ where: {email: email} });
-    }
+  FindOneUser(username: string): Promise<UserEntity> {
+    return this.userRepo.findOne({ where: { username: username } });
+  }
 
-    FindOneUser(username: string): Promise<UserEntity> {
-        return this.userRepo.findOne({ where: {username: username} });
-    }
-
-    FindOneId(id: string): Promise<UserEntity> {
-        return this.userRepo.findOne({ where: {id: id} });
-    }
+  FindOneId(id: string): Promise<UserEntity> {
+    return this.userRepo.findOne({ where: { id: id } });
+  }
 
   async getUserId(id: string): Promise<UserEntity> {
     if (!isUUID(id)) {
-      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);    
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
-    const foundId = await this.userRepo.findOne({ where: { id: id, },
-    });
-    if (foundId === null ){
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND); 
-    } 
+    const foundId = await this.userRepo.findOne({ where: { id: id } });
+    if (foundId === null) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
     return foundId;
   }
 
-
-  async create(userDto: CreateUserDto): Promise<UserEntity> {    
-    const { username, password, email } = userDto;    
-    const userInDb = await this.userRepo.findOne({ 
-        where: { email } 
+  async create(userDto: CreateUserDto): Promise<UserEntity> {
+    const { username, password, email } = userDto;
+    const userInDb = await this.userRepo.findOne({
+      where: { email },
     });
     if (userInDb) {
-        throw new HttpException('User already exists', HttpStatus.INTERNAL_SERVER_ERROR);    
+      throw new HttpException(
+        'User already exists',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
-    const user: UserEntity = await this.userRepo.create({ username, password, email });
+    const user: UserEntity = await this.userRepo.create({
+      username,
+      password,
+      email,
+    });
     await this.userRepo.save(user);
-    return user;  
+    return user;
   }
 
+  async findAllUser(): Promise<UserEntity[]> {
+    const users = await this.userRepo.find();
+    console.table([users[0]]);
+    return this.userRepo.find();
+  }
 
-  async findAllUser(): Promise<UserEntity[]>{
-    const users = await this.userRepo.find()
-    console.table([users[0]])
-    return this.userRepo.find()
+  async Seed() {
+    void function seed10RandomUser() {
+      for (let i = 0; i < 10; i++) {
+        const user = {
+          username: faker.internet.userName(),
+          email: faker.internet.email(),
+          password: 'password',
+        };
+        this.userRepo.save(user);
+      }
+    };
   }
 }
