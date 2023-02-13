@@ -2,7 +2,7 @@ import { BeforeInsert, Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryG
 import * as bcrypt from 'bcrypt';
 import { CommentEntity } from "src/comments/comments.entity";
 import { WishlistEntity } from "src/wishlist/wishlist.entity";
-import { CategroriesEntity } from "src/categories/categories.entity";
+import { CategoriesEntity } from "src/categories/categories.entity";
 
 @Entity('user')
 export class UserEntity {  
@@ -41,7 +41,7 @@ export class UserEntity {
     @OneToMany(type => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity[];
 
-    @ManyToMany(() => CategroriesEntity, categories => categories.user)
-    categories: CategroriesEntity[]
+    @ManyToMany(() => CategoriesEntity, categories => categories.user)
+    categories: CategoriesEntity[]
 }
 

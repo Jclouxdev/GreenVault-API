@@ -8,8 +8,10 @@ import { UsersModule } from './users/users.module';
 import { GroupsEntity } from './groups/groups.entity';
 import { CommentEntity } from './comments/comments.entity';
 import { announcementEntity } from './announcements/announcement.entity';
-import { CategroriesEntity } from './categories/categories.entity';
+import { CategoriesEntity } from './categories/categories.entity';
 import { WishlistEntity } from './wishlist/wishlist.entity';
+import { CategoriesModule } from './categories/categories.module';
+import { GroupsModule } from './groups/groups.module';
 
 @Module({
   imports: [
@@ -28,7 +30,7 @@ import { WishlistEntity } from './wishlist/wishlist.entity';
           GroupsEntity,
           CommentEntity,
           announcementEntity,
-          CategroriesEntity,
+          CategoriesEntity,
           WishlistEntity,
         ],
         synchronize: true,
@@ -36,6 +38,8 @@ import { WishlistEntity } from './wishlist/wishlist.entity';
       inject: [ConfigService],
     }),
     UsersModule,
+    CategoriesModule,
+    GroupsModule,
     AuthModule,
   ],
   controllers: [],

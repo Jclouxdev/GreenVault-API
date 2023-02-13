@@ -1,18 +1,23 @@
+import { GroupsEntity } from "src/groups/groups.entity";
 import { UserEntity } from "src/users/user.entity";
 import { BeforeInsert, Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('categories')
-export class CategroriesEntity {  
+export class CategoriesEntity {  
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type:"varchar", nullable: false})
+    @Column({ type:"varchar", nullable: false, unique: true})
     name: string;
 
     @Column({type:'uuid', nullable: false})
-    groupe_id: string;
+    group_id: string;
 
     @ManyToMany(() => UserEntity, user => user.categories)
     user: UserEntity[]
+
+    @ManyToOne(()=> GroupsEntity, categories => categories.categories)
+    groups_id: GroupsEntity;
+
 }
