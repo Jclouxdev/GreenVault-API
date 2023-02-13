@@ -1,9 +1,17 @@
-FROM node:18-bullseye
+# FROM node:18-bullseye
 
-WORKDIR /opt
+# WORKDIR /opt
 
+# COPY . .
+
+# RUN npm ci
+
+# CMD npm run start
+
+FROM node:latest
+
+WORKDIR /usr/src/app
+COPY package.json .
+COPY package-lock.json .
+RUN npm install --quiet
 COPY . .
-
-RUN npm ci
-
-CMD npm run start
