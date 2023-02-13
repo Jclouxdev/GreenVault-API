@@ -14,9 +14,6 @@ export class CategoriesEntity {
     @Column({type:'uuid', nullable: false})
     group_id: string;
 
-    @ManyToMany(() => UserEntity, user => user.categories)
-    user: UserEntity[]
-
     @ManyToOne(()=> GroupsEntity, categories => categories.categories)
     groups_id: GroupsEntity;
 

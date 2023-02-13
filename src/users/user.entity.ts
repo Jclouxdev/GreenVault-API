@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { CommentEntity } from "src/comments/comments.entity";
 import { WishlistEntity } from "src/wishlist/wishlist.entity";
 import { CategoriesEntity } from "src/categories/categories.entity";
+import { FollowedCategoriesEntity } from "src/followed_categories/followed_categories.entity";
 
 @Entity('user')
 export class UserEntity {  
@@ -41,7 +42,7 @@ export class UserEntity {
     @OneToMany(() => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity[];
 
-    @ManyToMany(() => CategoriesEntity, categories => categories.user)
-    categories: CategoriesEntity[]
+    @ManyToMany(() => FollowedCategoriesEntity, categories => categories.user)
+    categories: FollowedCategoriesEntity[]
 }
 

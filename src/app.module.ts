@@ -14,6 +14,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { GroupsModule } from './groups/groups.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
 import { WishlistModule } from './wishlist/wishlist.module';
+import { FollowedCategoriesModule } from './followed_categories/followed_categories.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { WishlistModule } from './wishlist/wishlist.module';
     GroupsModule,
     AnnouncementsModule,
     WishlistModule,
+    FollowedCategoriesModule,
     AuthModule,
   ],
   controllers: [],
