@@ -1,6 +1,6 @@
 import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserEntity } from "../users/user.entity";
-import { announcementEntity } from "../announcements/announcement.entity";
+import { AnnouncementsEntity } from "../announcements/announcement.entity";
 
 @Entity('wishlist')
 export class WishlistEntity {  
@@ -13,9 +13,9 @@ export class WishlistEntity {
     @Column({ type:"uuid", nullable: false})
     announcement_id: string;
 
-    @ManyToOne(type => UserEntity, user => user.wishlist)
+    @ManyToOne(() => UserEntity, user => user.wishlist)
     user: UserEntity;
 
-    @ManyToOne(type => announcementEntity, announcement => announcement.wishlist)
-    announcement: announcementEntity;
+    @ManyToOne(() => AnnouncementsEntity, announcements => announcements.wishlist)
+    announcements: AnnouncementsEntity;
 }

@@ -35,10 +35,10 @@ export class UserEntity {
         this.password = await bcrypt.hash(this.password, 10);  
     }
 
-    @OneToMany(type => CommentEntity, comment => comment.user)
+    @OneToMany(() => CommentEntity, comment => comment.user)
     comments: CommentEntity[];
 
-    @OneToMany(type => WishlistEntity, wishlist => wishlist.user)
+    @OneToMany(() => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity[];
 
     @ManyToMany(() => CategoriesEntity, categories => categories.user)

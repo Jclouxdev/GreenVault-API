@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToOne, CreateDateColumn } fr
 import { WishlistEntity } from "../wishlist/wishlist.entity";
 
 @Entity('announcement')
-export class announcementEntity {
+export class AnnouncementsEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -26,9 +26,9 @@ export class announcementEntity {
     description: string;
 
     @Column({ 
-        type: "integer",  
+        type: "varchar",  
     })
-    categories_id: number;
+    categories: string;
 
     @CreateDateColumn({ 
         type: "datetime", 
@@ -57,6 +57,6 @@ export class announcementEntity {
     })
     hidden: boolean;
 
-    @OneToOne(type => WishlistEntity, wishlist => wishlist.user)
+    @OneToOne(() => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity;
 }

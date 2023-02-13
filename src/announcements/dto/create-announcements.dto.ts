@@ -1,8 +1,6 @@
 import { IsNotEmpty, IsEmail, IsNumber, IsString } from "class-validator";
 
-export class AnnouncementsDto {
-    @IsNotEmpty()
-    id: string;
+export class CreateAnnouncementsDto {
 
     @IsNotEmpty()
     user_id: string;
@@ -22,12 +20,4 @@ export class AnnouncementsDto {
     @IsString()
     categories: string;
 
-    @IsNotEmpty()
-    creation_date: string;
-
-    @IsNotEmpty()
-    status: boolean;
-
-    @IsNotEmpty()
-    paiement_date: string;
 }

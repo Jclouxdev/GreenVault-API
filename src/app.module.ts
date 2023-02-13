@@ -7,11 +7,13 @@ import { UserEntity } from './users/user.entity';
 import { UsersModule } from './users/users.module';
 import { GroupsEntity } from './groups/groups.entity';
 import { CommentEntity } from './comments/comments.entity';
-import { announcementEntity } from './announcements/announcement.entity';
+import { AnnouncementsEntity } from './announcements/announcement.entity';
 import { CategoriesEntity } from './categories/categories.entity';
 import { WishlistEntity } from './wishlist/wishlist.entity';
 import { CategoriesModule } from './categories/categories.module';
 import { GroupsModule } from './groups/groups.module';
+import { AnnouncementsModule } from './announcements/announcements.module';
+import { WishlistModule } from './wishlist/wishlist.module';
 
 @Module({
   imports: [
@@ -29,7 +31,7 @@ import { GroupsModule } from './groups/groups.module';
           UserEntity,
           GroupsEntity,
           CommentEntity,
-          announcementEntity,
+          AnnouncementsEntity,
           CategoriesEntity,
           WishlistEntity,
         ],
@@ -40,6 +42,8 @@ import { GroupsModule } from './groups/groups.module';
     UsersModule,
     CategoriesModule,
     GroupsModule,
+    AnnouncementsModule,
+    WishlistModule,
     AuthModule,
   ],
   controllers: [],
