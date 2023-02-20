@@ -66,7 +66,7 @@ export class AnnouncementsEntity {
     @ManyToOne(() => CategoriesEntity, categories => categories.announcements)
     categories: CategoriesEntity[]
 
-    @ManyToOne(() => UserEntity, user => user.user)
+    @ManyToOne(() => UserEntity, user => user.announcement)
     users_id: UserEntity
 
     @OneToMany(() => CommentEntity, comment => comment.announcement)

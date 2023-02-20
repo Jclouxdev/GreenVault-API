@@ -31,6 +31,9 @@ export class UserEntity {
     }) 
     creation_date: Date;
 
+    @Column({ type: "boolean", nullable: false, default: false})
+    CGU: boolean;
+
     @BeforeInsert()  
     async hashPassword() {
         this.password = await bcrypt.hash(this.password, 10);  
@@ -47,6 +50,6 @@ export class UserEntity {
     categories: CategoriesEntity[]
 
     @OneToMany(() => AnnouncementsEntity, announcement => announcement.users_id)
-    user: AnnouncementsEntity
+    announcement: AnnouncementsEntity
 }
 
