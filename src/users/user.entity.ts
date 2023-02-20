@@ -1,9 +1,9 @@
-import { BeforeInsert, Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, ManyToMany, OneToMany, JoinTable, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { CommentEntity } from "src/comments/comments.entity";
 import { WishlistEntity } from "src/wishlist/wishlist.entity";
 import { CategoriesEntity } from "src/categories/categories.entity";
-import { FollowedCategoriesEntity } from "src/followed_categories/followed_categories.entity";
+import { AnnouncementsEntity } from "src/announcements/announcement.entity";
 
 @Entity('user')
 export class UserEntity {  
@@ -42,7 +42,11 @@ export class UserEntity {
     @OneToMany(() => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity[];
 
-    @ManyToMany(() => FollowedCategoriesEntity, categories => categories.user)
-    categories: FollowedCategoriesEntity[]
+    @ManyToMany(() => CategoriesEntity, categories => categories.user)
+    @JoinTable()
+    categories: CategoriesEntity[]
+
+    @OneToMany(() => AnnouncementsEntity, announcement => announcement.users_id)
+    user: AnnouncementsEntity
 }
 

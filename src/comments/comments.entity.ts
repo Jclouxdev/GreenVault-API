@@ -1,3 +1,4 @@
+import { AnnouncementsEntity } from "src/announcements/announcement.entity";
 import { BeforeInsert, Column, Entity, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 import { UserEntity } from "../users/user.entity";
 
@@ -23,7 +24,10 @@ export class CommentEntity {
     }) 
     message: string;
 
-    @ManyToOne(type => UserEntity, user => user.comments)
+    @ManyToOne(() => UserEntity, user => user.comments)
     user: UserEntity;
+
+    @ManyToOne(() => AnnouncementsEntity, announcement => announcement.comments)
+    announcement: AnnouncementsEntity
 
 }

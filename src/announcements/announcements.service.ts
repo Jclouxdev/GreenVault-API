@@ -13,9 +13,9 @@ export class AnnouncementsService {
   ) {}
 
   async create(announcementsDto: CreateAnnouncementsDto): Promise<AnnouncementsEntity> {
-    const { user_id, title, price, description, categories } = announcementsDto;
+    const { user_id, title, price, description, categorie } = announcementsDto;
     try{
-        const announcements: AnnouncementsEntity = await this.announcementsRepo.create({ user_id, title, price, description, categories })
+        const announcements: AnnouncementsEntity = await this.announcementsRepo.create({ user_id, title, price, description, categorie })
         await this.announcementsRepo.save(announcements)
         return announcements
     }

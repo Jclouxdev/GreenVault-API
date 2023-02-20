@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, CreateDateColumn } from "typeorm";
+import { CategoriesEntity } from "src/categories/categories.entity";
+import { CommentEntity } from "src/comments/comments.entity";
+import { UserEntity } from "src/users/user.entity";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, CreateDateColumn, ManyToOne, OneToMany } from "typeorm";
 import { WishlistEntity } from "../wishlist/wishlist.entity";
 
 @Entity('announcement')
@@ -28,7 +31,7 @@ export class AnnouncementsEntity {
     @Column({ 
         type: "varchar",  
     })
-    categories: string;
+    categorie: string;
 
     @CreateDateColumn({ 
         type: "datetime", 
@@ -59,4 +62,13 @@ export class AnnouncementsEntity {
 
     @OneToOne(() => WishlistEntity, wishlist => wishlist.user)
     wishlist: WishlistEntity;
+
+    @ManyToOne(() => CategoriesEntity, categories => categories.announcements)
+    categories: CategoriesEntity[]
+
+    @ManyToOne(() => UserEntity, user => user.user)
+    users_id: UserEntity
+
+    @OneToMany(() => CommentEntity, comment => comment.announcement)
+    comments: CommentEntity
 }

@@ -1,9 +1,11 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isUUID } from 'class-validator';
+import { AnnouncementsEntity } from 'src/announcements/announcement.entity';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
 import { UserEntity } from './user.entity';
 
 @Injectable()
@@ -64,7 +66,6 @@ export class UsersService {
     }
     return await this.userRepo.delete(id);
   }
-
 
   async findAllUser(): Promise<UserEntity[]>{
     const users = await this.userRepo.find()

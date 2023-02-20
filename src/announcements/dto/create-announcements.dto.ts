@@ -18,6 +18,6 @@ export class CreateAnnouncementsDto {
     description: string;
 
     @IsString()
-    categories: string;
+    categorie: string;
 
 }
