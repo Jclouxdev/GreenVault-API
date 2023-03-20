@@ -10,7 +10,7 @@ export class AnnouncementsEntity {
     id: string;
 
     @Column({ type:"varchar", nullable: false})
-    user_name: string;
+    user_id: string;
 
     @Column({ 
         type: "varchar", 
@@ -29,7 +29,7 @@ export class AnnouncementsEntity {
     description: string;
 
     @Column({ 
-        type: "varchar",  
+        type: "uuid",  
     })
     categorie: string;
 
@@ -70,7 +70,7 @@ export class AnnouncementsEntity {
     categories: CategoriesEntity[]
 
     @ManyToOne(() => UserEntity, user => user.announcement)
-    users_name: UserEntity
+    users_id: UserEntity
 
     @OneToMany(() => CommentEntity, comment => comment.announcement)
     comments: CommentEntity
