@@ -18,15 +18,13 @@ import { WishlistModule } from './wishlist/wishlist.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
+    TypeOrmModule.forRoot({
         type: 'mysql',
-        host: configService.get('MYSQL_HOST'),
-        port: +configService.get<number>('MYSQL_PORT'),
-        username: configService.get('MYSQL_USER'),
-        password: configService.get('MYSQL_PASSWORD'),
-        database: configService.get('MYSQL_DATABASE'),
+        host: 'mysql',
+        port: 3306,
+        username: 'user',
+        password: 'password',
+        database: 'db',
         entities: [
           UserEntity,
           GroupsEntity,
@@ -36,8 +34,6 @@ import { WishlistModule } from './wishlist/wishlist.module';
           WishlistEntity,
         ],
         synchronize: true,
-      }),
-      inject: [ConfigService],
     }),
     UsersModule,
     CategoriesModule,
