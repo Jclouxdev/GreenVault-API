@@ -13,11 +13,11 @@ export class AnnouncementsService {
   ) {}
 
   async create(announcementsDto: CreateAnnouncementsDto): Promise<AnnouncementsEntity> {
-    const { user_id, title, price, description, categorie } = announcementsDto;
+    const { user_name, title, price, description, categorie } = announcementsDto;
     console.log(announcementsDto);
     
     try{
-        const announcements: AnnouncementsEntity = await this.announcementsRepo.create({ user_id, title, price, description, categorie })
+        const announcements: AnnouncementsEntity = await this.announcementsRepo.create({ user_name, title, price, description, categorie })
         console.log(announcements);
         await this.announcementsRepo.save(announcements)
         return announcements

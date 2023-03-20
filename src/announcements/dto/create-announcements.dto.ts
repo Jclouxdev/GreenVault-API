@@ -3,7 +3,7 @@ import { IsNotEmpty, IsEmail, IsNumber, IsString } from "class-validator";
 export class CreateAnnouncementsDto {
 
     @IsNotEmpty()
-    user_id: string;
+    user_name: string;
 
     @IsNotEmpty()
     @IsString()

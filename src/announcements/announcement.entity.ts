@@ -9,8 +9,8 @@ export class AnnouncementsEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type:"uuid", nullable: false})
-    user_id: string;
+    @Column({ type:"varchar", nullable: false})
+    user_name: string;
 
     @Column({ 
         type: "varchar", 
@@ -29,7 +29,7 @@ export class AnnouncementsEntity {
     description: string;
 
     @Column({ 
-        type: "uuid",  
+        type: "varchar",  
     })
     categorie: string;
 
@@ -70,7 +70,7 @@ export class AnnouncementsEntity {
     categories: CategoriesEntity[]
 
     @ManyToOne(() => UserEntity, user => user.announcement)
-    users_id: UserEntity
+    users_name: UserEntity
 
     @OneToMany(() => CommentEntity, comment => comment.announcement)
     comments: CommentEntity
