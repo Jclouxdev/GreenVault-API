@@ -19,7 +19,7 @@ export class AnnouncementsEntity {
     })
     title: string;
 
-    @Column({ type: "float", nullable: false})
+    @Column({ type: "int", nullable: false})
     price: number;
 
     @Column({ 
@@ -29,7 +29,7 @@ export class AnnouncementsEntity {
     description: string;
 
     @Column({ 
-        type: "varchar",  
+        type: "uuid",  
     })
     categorie: string;
 
@@ -41,22 +41,25 @@ export class AnnouncementsEntity {
 
     @Column({
         type: "boolean",
+        default: true,
     })
     status: boolean;
 
-    @Column({
+    @CreateDateColumn({
         type: "datetime",
-        nullable: false
+        nullable: true,
     })
-    paiement_date: string;
+    paiement_date: Date;
 
     @Column({
         type: "boolean",
+        default: false
     })
     reported: boolean;
 
     @Column({
         type: "boolean",
+        default: false
     })
     hidden: boolean;
 

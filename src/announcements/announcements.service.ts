@@ -14,13 +14,17 @@ export class AnnouncementsService {
 
   async create(announcementsDto: CreateAnnouncementsDto): Promise<AnnouncementsEntity> {
     const { user_id, title, price, description, categorie } = announcementsDto;
+    console.log(announcementsDto);
+    
     try{
         const announcements: AnnouncementsEntity = await this.announcementsRepo.create({ user_id, title, price, description, categorie })
+        console.log(announcements);
         await this.announcementsRepo.save(announcements)
         return announcements
     }
     catch(e){
-        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST); 
+      console.log(e);
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST); 
     }
   }
 

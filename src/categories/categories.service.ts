@@ -30,6 +30,17 @@ export class CategoriesService {
     return this.categoriesRepo.find()
   }
 
+  async findCategoriesByGroupId(groupId: string): Promise<CategoriesEntity[]>{
+    if (!isUUID(groupId)) {
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);    
+    }
+    const categories = await this.categoriesRepo.find({where: {group_id: groupId}})
+    if(categories.length == 0){
+      throw new NotFoundException(`No categories found for group_id ${groupId}`);
+    }
+    return categories
+  }
+
 
   async update(categories: CategoriesEntity): Promise<CreateCategoriesDto> {
     try{

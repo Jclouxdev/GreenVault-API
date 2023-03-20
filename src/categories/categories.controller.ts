@@ -24,6 +24,12 @@ export class CategoriesController {
     return this.categoriesService.findAllCategories();
   }
 
+  @Get(':group_id/categories')
+  getCategoriesByGroupId(@Param('group_id') group_id: string) {
+    return this.categoriesService.findCategoriesByGroupId(group_id);
+  }
+
+
   @Patch(':id/update')
   update(@Param('id') id: string, @Body() updateCategories: CategoriesEntity) {
     updateCategories.id = String(id)

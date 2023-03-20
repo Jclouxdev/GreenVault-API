@@ -12,15 +12,15 @@ export class AnnouncementsDto {
     title: string;
 
     @IsNotEmpty()
-    @IsNumber()
     price: number;
 
     @IsNotEmpty()
     @IsString()
     description: string;
 
+    @IsNotEmpty()
     @IsString()
-    categories: string;
+    categorie: string;
 
     @IsNotEmpty()
     creation_date: string;

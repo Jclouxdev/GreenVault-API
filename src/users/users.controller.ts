@@ -25,7 +25,6 @@ export class UsersController {
     return this.userService.create(user);
   }
 
-  @UseGuards(LocalAuthGuard)
   @UsePipes(ValidationPipe)
   @Post('/auth/login')
   public async login(@Body() loginUserDto: LoginUserDto) {
