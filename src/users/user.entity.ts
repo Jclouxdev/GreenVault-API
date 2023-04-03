@@ -1,47 +1,55 @@
-import { BeforeInsert, Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { CommentEntity } from "src/comments/comments.entity";
-import { WishlistEntity } from "src/wishlist/wishlist.entity";
-import { CategroriesEntity } from "src/categories/categories.entity";
+import { CommentEntity } from 'src/comments/comments.entity';
+import { WishlistEntity } from 'src/wishlist/wishlist.entity';
+import { CategroriesEntity } from 'src/categories/categories.entity';
 
 @Entity('user')
-export class UserEntity {  
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+export class UserEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({ type: "varchar", nullable: false})
-    username: string;
+  @Column({ type: 'varchar', nullable: false })
+  username: string;
 
-    @Column({ type: "varchar", nullable: false})
-    email: string;
+  @Column({ type: 'varchar', nullable: false })
+  email: string;
 
-    @Column({ type: "varchar", nullable: false})
-    password: string;
+  @Column({ type: 'varchar', nullable: false })
+  password: string;
 
-    @Column({ type: "boolean", nullable: false, default: false})
-    Admin: boolean;
+  @Column({ type: 'boolean', nullable: false, default: false })
+  Admin: boolean;
 
-    @Column({ type: "float", nullable: false, default: 100})
-    wallet: number;
+  @Column({ type: 'float', nullable: false, default: 100 })
+  wallet: number;
 
-    @CreateDateColumn({ 
-        type: "datetime", 
-        nullable: false,
-    }) 
-    creation_date: Date;
+  @CreateDateColumn({
+    type: 'datetime',
+    nullable: false,
+  })
+  creation_date: Date;
 
-    @BeforeInsert()  
-    async hashPassword() {
-        this.password = await bcrypt.hash(this.password, 10);  
-    }
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 
-    @OneToMany(type => CommentEntity, comment => comment.user)
-    comments: CommentEntity[];
+  @OneToMany((type) => CommentEntity, (comment) => comment.user)
+  comments: CommentEntity[];
 
-    @OneToMany(type => WishlistEntity, wishlist => wishlist.user)
-    wishlist: WishlistEntity[];
+  @OneToMany((type) => WishlistEntity, (wishlist) => wishlist.user)
+  wishlist: WishlistEntity[];
 
-    @ManyToMany(() => CategroriesEntity, categories => categories.user)
-    categories: CategroriesEntity[]
+  @ManyToMany(() => CategroriesEntity, (categories) => categories.user)
+  categories: CategroriesEntity[];
 }
-

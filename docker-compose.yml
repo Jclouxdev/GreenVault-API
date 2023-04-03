@@ -1,31 +1,3 @@
-# version: '3'
-# services:
-#   app :
-#     build:
-#       context: .
-#       dockerfile: Dockerfile
-#     ports:
-#       - 5432:5432
-#     volumes:
-#       - .:/usr/src/app/
-#     depends_on:
-#       - MySql
-#   MySql:
-#     container_name: GreenvaultDb
-#     image: mysql
-#     environment:
-#       MYSQL_DATABASE: 'db'
-#       MYSQL_USER: 'user'
-#       MYSQL_PASSWORD: 'password'
-#       MYSQL_ROOT_PASSWORD: 'password'
-#     ports:
-#       - 3306:3306
-#     volumes:
-#       - my-sql:/var/lib/mysql
-
-# volumes:
-#   my-sql:
-
 version: '3.8'
 services:
   app:
@@ -34,7 +6,7 @@ services:
     volumes:
       - .:/usr/src/app/
     ports:
-      - '5432:5432'
+      - '8080:8080'
     depends_on:
       - MySql
 
