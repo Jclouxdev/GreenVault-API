@@ -11,11 +11,9 @@ import {
 } from '@nestjs/common';
 import { RoleGuard } from 'src/auth/role/role.guard';
 import { JwtAuthGuard } from './../auth/guards/jwt-auth.guards';
-import { LocalAuthGuard } from './../auth/guards/local-auth.guard';
 import { AuthService } from './../auth/services/auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './user.service';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './user.entity';
 import { Patch, Delete } from '@nestjs/common';
 
