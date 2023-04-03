@@ -6,6 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  BeforeUpdate,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { CommentEntity } from 'src/comments/comments.entity';
@@ -13,6 +14,7 @@ import { WishlistEntity } from 'src/wishlist/wishlist.entity';
 import { CategoriesEntity } from 'src/categories/categories.entity';
 import { JoinTable } from 'typeorm';
 import { AnnouncementsEntity } from '../announcements/announcement.entity';
+import { InternalServerErrorException } from '@nestjs/common';
 
 @Entity('user')
 export class UserEntity {
@@ -44,8 +46,16 @@ export class UserEntity {
   CGU: boolean;
 
   @BeforeInsert()
-  async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
+  @BeforeUpdate()
+  async hashPassword(): Promise<void> {
+    if (this.password) {
+      try {
+        const salt = parseInt(process.env.SALT);
+        this.password = await bcrypt.hash(this.password, salt);
+      } catch (error) {
+        throw new InternalServerErrorException('unable to hash password');
+      }
+    }
   }
 
   @OneToMany(() => CommentEntity, (comment) => comment.user)

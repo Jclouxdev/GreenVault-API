@@ -1,8 +1,7 @@
-import { IsNotEmpty, IsEmail, IsString } from "class-validator";
+import { IsNotEmpty, IsEmail, IsString } from 'class-validator';
 
-export class CreateGroupsDto {  
-
-    @IsNotEmpty()
-    @IsString()
-      name: string;
+export class CreateGroupsDto {
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 }

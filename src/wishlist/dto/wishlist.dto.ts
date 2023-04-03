@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsEmail } from "class-validator";
+import { IsNotEmpty, IsEmail } from 'class-validator';
 
-export class WishlistDto {  
-    @IsNotEmpty()  id: string;
-    @IsNotEmpty()  user_id: string;
-    @IsNotEmpty()  announcement_id: string;
+export class WishlistDto {
+  @IsNotEmpty() id: string;
+  @IsNotEmpty() user_id: string;
+  @IsNotEmpty() announcement_id: string;
 }

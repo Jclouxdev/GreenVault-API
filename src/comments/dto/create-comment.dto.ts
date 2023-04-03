@@ -1,5 +1,5 @@
-import { IsNotEmpty, IsEmail } from "class-validator";
+import { IsNotEmpty, IsEmail } from 'class-validator';
 
-export class CreateCommentsDto {  
-    @IsNotEmpty()  message: string;
+export class CreateCommentsDto {
+  @IsNotEmpty() message: string;
 }

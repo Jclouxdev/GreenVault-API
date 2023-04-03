@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException, Query } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+  Query,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isUUID } from 'class-validator';
 import { DeleteResult, Repository } from 'typeorm';
@@ -8,56 +14,59 @@ import { CreateCategoriesDto } from './dto/create-categories.dto';
 @Injectable()
 export class CategoriesService {
   constructor(
-    @InjectRepository(CategoriesEntity)    
+    @InjectRepository(CategoriesEntity)
     private readonly categoriesRepo: Repository<CategoriesEntity>,
   ) {}
 
   async create(categoriesDto: CreateCategoriesDto): Promise<CategoriesEntity> {
     const { name, group_id } = categoriesDto;
-    try{
-        const categories: CategoriesEntity = await this.categoriesRepo.create({ name, group_id })
-        await this.categoriesRepo.save(categories)
-        return categories
-    }
-    catch(e){
-        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST); 
+    try {
+      const categories: CategoriesEntity = await this.categoriesRepo.create({
+        name,
+        group_id,
+      });
+      await this.categoriesRepo.save(categories);
+      return categories;
+    } catch (e) {
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
   }
 
-  async findAllCategories(): Promise<CategoriesEntity[]>{
-    const categories = await this.categoriesRepo.find()
-    console.table([categories[0]])
-    return this.categoriesRepo.find()
+  async findAllCategories(): Promise<CategoriesEntity[]> {
+    const categories = await this.categoriesRepo.find();
+    console.table([categories[0]]);
+    return this.categoriesRepo.find();
   }
 
-  async findCategoriesByGroupId(groupId: string): Promise<CategoriesEntity[]>{
+  async findCategoriesByGroupId(groupId: string): Promise<CategoriesEntity[]> {
     if (!isUUID(groupId)) {
-      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);    
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
-    const categories = await this.categoriesRepo.find({where: {group_id: groupId}})
-    if(categories.length == 0){
-      throw new NotFoundException(`No categories found for group_id ${groupId}`);
+    const categories = await this.categoriesRepo.find({
+      where: { group_id: groupId },
+    });
+    if (categories.length == 0) {
+      throw new NotFoundException(
+        `No categories found for group_id ${groupId}`,
+      );
     }
-    return categories
+    return categories;
   }
-
 
   async update(categories: CategoriesEntity): Promise<CreateCategoriesDto> {
-    try{
-        await this.categoriesRepo.update(categories.id, categories);
-        await this.categoriesRepo.save(categories);
-        return categories;
-    }
-    catch(e){
-        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+    try {
+      await this.categoriesRepo.update(categories.id, categories);
+      await this.categoriesRepo.save(categories);
+      return categories;
+    } catch (e) {
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
   }
 
-  async delete(id :string): Promise<DeleteResult> {
+  async delete(id: string): Promise<DeleteResult> {
     if (!isUUID(id)) {
-        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);    
-      }
-      return await this.categoriesRepo.delete(id);
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     }
-
+    return await this.categoriesRepo.delete(id);
+  }
 }

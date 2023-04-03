@@ -6,10 +6,12 @@ import { WishlistEntity } from './wishlist.entity';
 import { WishlistService } from './wishlist.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([WishlistEntity]), forwardRef(()=>AuthModule)],
-    controllers: [WishlistController],
-    providers: [WishlistService],
-    exports: [WishlistService],
-  })
-
+  imports: [
+    TypeOrmModule.forFeature([WishlistEntity]),
+    forwardRef(() => AuthModule),
+  ],
+  controllers: [WishlistController],
+  providers: [WishlistService],
+  exports: [WishlistService],
+})
 export class WishlistModule {}

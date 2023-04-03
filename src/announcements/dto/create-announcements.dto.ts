@@ -1,23 +1,21 @@
-import { IsNotEmpty, IsEmail, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsEmail, IsNumber, IsString } from 'class-validator';
 
 export class CreateAnnouncementsDto {
+  @IsNotEmpty()
+  user_id: string;
 
-    @IsNotEmpty()
-    user_id: string;
+  @IsNotEmpty()
+  @IsString()
+  title: string;
 
-    @IsNotEmpty()
-    @IsString()
-    title: string;
+  @IsNotEmpty()
+  @IsNumber()
+  price: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    price: number;
+  @IsNotEmpty()
+  @IsString()
+  description: string;
 
-    @IsNotEmpty()
-    @IsString()
-    description: string;
-
-    @IsString()
-    categorie: string;
-
+  @IsString()
+  categorie: string;
 }

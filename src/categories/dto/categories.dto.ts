@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsEmail } from "class-validator";
+import { IsNotEmpty, IsEmail } from 'class-validator';
 
-export class CategoriesDto {  
-    @IsNotEmpty()  id: string;
-    @IsNotEmpty()  name: string;
-    @IsNotEmpty()  group_id: string;
+export class CategoriesDto {
+  @IsNotEmpty() id: string;
+  @IsNotEmpty() name: string;
+  @IsNotEmpty() group_id: string;
 }

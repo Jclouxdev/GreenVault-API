@@ -2,7 +2,6 @@ import { AnnouncementsEntity } from 'src/announcements/announcement.entity';
 import { GroupsEntity } from 'src/groups/groups.entity';
 import { UserEntity } from 'src/users/user.entity';
 import {
-  BeforeInsert,
   Column,
   Entity,
   ManyToMany,
