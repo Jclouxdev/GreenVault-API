@@ -4,13 +4,13 @@ services:
     build: .
     command: npm run start:dev
     volumes:
-      - ./src:/usr/src/app/src 
+      - ./src:/usr/src/app/src
       - ./dist:/usr/src/app/dist
       - ./tsconfig.json:/usr/src/app/tsconfig.json
     ports:
       - '8081:8081'
     networks:
-      api-dev: 
+      api-dev:
 
   mysql:
     container_name: GreenvaultDb
@@ -26,9 +26,9 @@ services:
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     networks:
-      api-dev: 
+      api-dev:
 
 volumes:
   mysql:
 networks:
-  api-dev: 
+  api-dev:

@@ -5,12 +5,13 @@ import { UsersController } from './users.controller';
 import { UserEntity } from './user.entity';
 import { UsersService } from './user.service';
 
-
 @Module({
-    imports: [TypeOrmModule.forFeature([UserEntity]), forwardRef(()=>AuthModule)],
-    controllers: [UsersController],
-    providers: [UsersService],
-    exports: [UsersService],
-  })
-
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    forwardRef(() => AuthModule),
+  ],
+  controllers: [UsersController],
+  providers: [UsersService],
+  exports: [UsersService],
+})
 export class UsersModule {}
