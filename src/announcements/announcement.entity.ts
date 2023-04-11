@@ -17,9 +17,6 @@ export class AnnouncementsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  user_id: string;
-
   @Column({
     type: 'varchar',
     length: 100,

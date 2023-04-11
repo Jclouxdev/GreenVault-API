@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isUUID } from 'class-validator';
+import { UserDto } from 'src/users/dto/user.dto';
 import { DeleteResult, Repository } from 'typeorm';
 import { AnnouncementsEntity } from './announcement.entity';
 import { CreateAnnouncementsDto } from './dto/create-announcements.dto';
@@ -19,15 +20,12 @@ export class AnnouncementsService {
   ) {}
 
   async create(
-    announcementsDto: CreateAnnouncementsDto,
+    announcementsDto: CreateAnnouncementsDto
   ): Promise<AnnouncementsEntity> {
-    const { user_id, title, price, description, categorie } = announcementsDto;
+    const { title, price, description, categorie } = announcementsDto;
     console.log(announcementsDto);
-
-    try {
       const announcements: AnnouncementsEntity =
         await this.announcementsRepo.create({
-          user_id,
           title,
           price,
           description,
@@ -36,10 +34,6 @@ export class AnnouncementsService {
       console.log(announcements);
       await this.announcementsRepo.save(announcements);
       return announcements;
-    } catch (e) {
-      console.log(e);
-      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-    }
   }
 
   async findAllAnnouncements(): Promise<AnnouncementsEntity[]> {

@@ -5,9 +5,6 @@ export class AnnouncementsDto {
   id: string;
 
   @IsNotEmpty()
-  user_id: string;
-
-  @IsNotEmpty()
   @IsString()
   title: string;
 

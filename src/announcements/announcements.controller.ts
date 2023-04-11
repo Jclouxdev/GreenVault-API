@@ -26,7 +26,9 @@ export class AnnouncementsController {
   create(
     @Body(new ValidationPipe({ transform: true, whitelist: true }))
     categories: CreateAnnouncementsDto,
+    @Request() req
   ) {
+    console.log("REQUEST: ", req.user)
     return this.announcementsService.create(categories);
   }
 
