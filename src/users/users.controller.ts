@@ -16,6 +16,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './user.service';
 import { UserEntity } from './user.entity';
 import { Patch, Delete } from '@nestjs/common';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -42,10 +43,10 @@ export class UsersController {
   @UsePipes(ValidationPipe)
   @Post('/auth/login')
   public async login(
-    // @Body() loginUserDto: LoginUserDto
-    @Request() req,
+    @Body() loginUserDto: LoginUserDto,
+    // @Request() req,
   ) {
-    return this.authService.login(req.user.email, req.user.id);
+    return this.authService.login(loginUserDto.email, loginUserDto.password);
   }
 
   @UseGuards(JwtAuthGuard)
