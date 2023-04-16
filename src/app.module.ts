@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserEntity } from './users/user.entity';
@@ -17,23 +17,25 @@ import { WishlistModule } from './wishlist/wishlist.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
-        type: 'mysql',
-        host: 'mysql',
-        port: 3306,
-        username: 'user',
-        password: 'password',
-        database: 'db',
-        entities: [
-          UserEntity,
-          GroupsEntity,
-          CommentEntity,
-          AnnouncementsEntity,
-          CategoriesEntity,
-          WishlistEntity,
-        ],
-        synchronize: true,
+      type: 'mysql',
+      host: process.env.MYSQL_HOST,
+      port: parseInt(process.env.MYSQL_PORT),
+      username: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+      entities: [
+        UserEntity,
+        GroupsEntity,
+        CommentEntity,
+        AnnouncementsEntity,
+        CategoriesEntity,
+        WishlistEntity,
+      ],
+      synchronize: true,
     }),
     UsersModule,
     CategoriesModule,

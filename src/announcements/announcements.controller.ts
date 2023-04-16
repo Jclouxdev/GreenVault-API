@@ -26,13 +26,20 @@ export class AnnouncementsController {
   create(
     @Body(new ValidationPipe({ transform: true, whitelist: true }))
     categories: CreateAnnouncementsDto,
+    @Request() req
   ) {
+    console.log("REQUEST: ", req.user)
     return this.announcementsService.create(categories);
   }
 
   @Get('')
   getAllCategories() {
     return this.announcementsService.findAllAnnouncements();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.announcementsService.findOne(id);
   }
 
   @Patch(':id/update')

@@ -17,9 +17,6 @@ export class AnnouncementsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  user_id: string;
-
   @Column({
     type: 'varchar',
     length: 100,
@@ -35,6 +32,12 @@ export class AnnouncementsEntity {
     nullable: false,
   })
   description: string;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  image: string;
 
   @Column({
     type: 'uuid',
@@ -78,7 +81,7 @@ export class AnnouncementsEntity {
   categories: CategoriesEntity[];
 
   @ManyToOne(() => UserEntity, (user) => user.announcement)
-  users_id: UserEntity;
+  user_name: UserEntity;
 
   @OneToMany(() => CommentEntity, (comment) => comment.announcement)
   comments: CommentEntity;
