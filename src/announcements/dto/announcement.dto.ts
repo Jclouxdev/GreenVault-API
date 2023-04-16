@@ -15,6 +15,9 @@ export class AnnouncementsDto {
   @IsString()
   description: string;
 
+  @IsString()
+  image: string;
+
   @IsNotEmpty()
   @IsString()
   categorie: string;

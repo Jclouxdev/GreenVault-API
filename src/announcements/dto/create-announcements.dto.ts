@@ -15,5 +15,8 @@ export class CreateAnnouncementsDto {
   description: string;
 
   @IsString()
+  image: string;
+
+  @IsString()
   categorie: string;
 }

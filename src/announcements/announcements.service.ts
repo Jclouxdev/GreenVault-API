@@ -22,7 +22,7 @@ export class AnnouncementsService {
   async create(
     announcementsDto: CreateAnnouncementsDto
   ): Promise<AnnouncementsEntity> {
-    const { title, price, description, categorie } = announcementsDto;
+    const { title, price, description, categorie, image } = announcementsDto;
     console.log(announcementsDto);
       const announcements: AnnouncementsEntity =
         await this.announcementsRepo.create({
@@ -30,6 +30,7 @@ export class AnnouncementsService {
           price,
           description,
           categorie,
+          image,
         });
       console.log(announcements);
       await this.announcementsRepo.save(announcements);

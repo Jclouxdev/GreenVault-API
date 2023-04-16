@@ -68,6 +68,6 @@ export class UserEntity {
   @JoinTable()
   categories: CategoriesEntity[];
 
-  @OneToMany(() => AnnouncementsEntity, (announcement) => announcement.users_id)
+  @OneToMany(() => AnnouncementsEntity, (announcement) => announcement.user_name)
   announcement: AnnouncementsEntity;
 }

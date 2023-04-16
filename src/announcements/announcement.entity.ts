@@ -34,6 +34,12 @@ export class AnnouncementsEntity {
   description: string;
 
   @Column({
+    type: 'text',
+    nullable: true,
+  })
+  image: string;
+
+  @Column({
     type: 'uuid',
   })
   categorie: string;
@@ -75,7 +81,7 @@ export class AnnouncementsEntity {
   categories: CategoriesEntity[];
 
   @ManyToOne(() => UserEntity, (user) => user.announcement)
-  users_id: UserEntity;
+  user_name: UserEntity;
 
   @OneToMany(() => CommentEntity, (comment) => comment.announcement)
   comments: CommentEntity;
