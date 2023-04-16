@@ -42,7 +42,16 @@ export class AnnouncementsService {
     console.table([announcements[0]]);
     return this.announcementsRepo.find();
   }
-  //RAJOUTER POUR TROUVER LES ANNONCES D'UN USER
+  async findOne(id: string): Promise<AnnouncementsEntity> {
+    if (!isUUID(id)) {
+      throw new HttpException('Invalid ID', HttpStatus.BAD_REQUEST);
+    }
+    const announcement = await this.announcementsRepo.findOne({ where: { id: id } });
+    if (!announcement) {
+      throw new NotFoundException(`Announcement with ID ${id} not found`);
+    }
+    return announcement;
+  }
 
   async update(
     announcements: AnnouncementsEntity,

@@ -37,6 +37,11 @@ export class AnnouncementsController {
     return this.announcementsService.findAllAnnouncements();
   }
 
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return this.announcementsService.findOne(id);
+  }
+
   @Patch(':id/update')
   update(
     @Param('id') id: string,
